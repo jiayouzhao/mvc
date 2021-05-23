@@ -1,0 +1,22 @@
+#app2{
+    border:1px solid blue;
+}
+
+#app2 .tab-bar ul{
+    display:flex;
+}
+
+#app2 .tab-bar li{
+    width:50%;
+    border:1px solid black;
+}
+#app2 .tab-bar li.selected{
+    background:black;
+    color:white;
+}
+#app2 .tab-content li{
+    display:none;
+}
+#app2 .tab-content li.active{
+    display:block;
+}
