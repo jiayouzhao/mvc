@@ -11,4 +11,5 @@
 }
 #app3 .box.active{
     transform: translateX(30vw);
+    
 }
