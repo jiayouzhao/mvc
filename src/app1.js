@@ -6,7 +6,7 @@ import View from "./base/View.js";
 const eventBus = $({});
 
 const m = new Model({ 
-	data:{ initN : parseFloat(localStorage.getItem("n")) },
+	data:{ initN : parseFloat(localStorage.getItem("n")) || 100 },
 	update:(data) => {
 		Object.assign(m.data, data);
 		eventBus.trigger("m:update");
