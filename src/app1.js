@@ -3,13 +3,11 @@ import $ from "jquery";
 import Model from "./base/Model.js";
 import View from "./base/View.js";
 
-const eventBus = $({});
-
 const m = new Model({ 
 	data:{ initN : parseFloat(localStorage.getItem("n")) || 100 },
 	update:(data) => {
 		Object.assign(m.data, data);
-		eventBus.trigger("m:update");
+		m.trigger("m:update");
 		localStorage.setItem("n", m.data.initN);
 	}
 });
@@ -28,18 +26,20 @@ const v = new View({
     </div>
     `,
 	render(n) {
-		if (v.el.children.length !== 0) {
-			v.el.empty();
+		if (this.el.children.length !== 0) {
+			this.el.empty();
 		}
-		$(v.html.replace("{{n}}", n)).appendTo(v.el);
+		$(this.html.replace("{{n}}", n)).appendTo(this.el);
 		
 	},
 	init(el) {
-		v.el = $(el);
-		v.render(m.data.initN);
-		v.autoBindEvents();
-		eventBus.on("m:update", () => {
-			v.render(m.data.initN);
+		this.el = $(el);
+		this.render(m.data.initN);
+		this.autoBindEvents();
+	
+		this.on("m:update", () => {
+		
+			this.render(m.data.initN);
 		});
 	},
 	events:{

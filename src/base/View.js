@@ -1,6 +1,10 @@
-class View {
+import EventBus from "./EventBus.js";
+
+class View extends EventBus {
 	constructor(options) {
+		super();
 		Object.assign(this, options);
+		
 	}
 	autoBindEvents() {
 		for (let key in this.events) {

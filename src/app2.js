@@ -3,14 +3,13 @@ import $ from "jquery";
 import Model from "./base/Model.js";
 import View from "./base/View.js";
 
-const eventBus = $({});
 const m = new Model({
 	data:{
 		localIndex : parseFloat(localStorage.getItem("app2-tab")) || 0
 	},
 	update(data) {
 		Object.assign(m.data, data);
-		eventBus.trigger("m:update");
+		m.trigger("m:update");
 		localStorage.setItem("app2-tab", m.data.localIndex);
 	}
 });
@@ -48,7 +47,7 @@ const v = new View({
 		this.el = $(el);
 		this.render(m.data.localIndex);
 		this.autoBindEvents();
-		eventBus.on("m:update", () => {
+		this.on("m:update", () => {
 			this.render(m.data.localIndex);
 		});
 	},
